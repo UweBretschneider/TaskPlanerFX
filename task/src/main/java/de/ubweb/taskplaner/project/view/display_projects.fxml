@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ubweb.taskplaner.project.presenter.ProjectsPresenter">
+   <children>
+    <TitledPane animated="false" text="Aktuelle Projekte">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="6.0">
+                     <content>
+                        <TableView fx:id="openProjectsTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                          <columns>
+                            <TableColumn fx:id="opTitleColumn" minWidth="200.0" prefWidth="200.0" text="Titel" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#showProjectDetails" text="Aufgaben anzeigen" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+      </content>
+    </TitledPane>
+    <TitledPane animated="false" text="Abgeschlossene Projekte">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true">
+                     <content>
+                        <TableView fx:id="closedProjectsTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                          <columns>
+                            <TableColumn fx:id="cpTitleColumn" minWidth="200.0" prefWidth="200.0" text="Titel" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+      </content>
+    </TitledPane>
+   </children>
+</VBox>

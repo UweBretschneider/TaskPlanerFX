@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="802.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ubweb.taskplaner.results.presenter.ResultsPresenter">
+   <center>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER" />
+          <RowConstraints minHeight="200.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TitledPane collapsible="false" text="Kürzlich erledigte Aufgaben" GridPane.rowIndex="1">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+                           <content>
+                              <TableView fx:id="finishedTasksTableView" prefWidth="1000.0">
+                                 <columns>
+                                    <TableColumn fx:id="fTIdColumn" prefWidth="75.0" text="TaskID" />
+                                    <TableColumn fx:id="fTNameColumn" minWidth="250.0" prefWidth="-1.0" text="Title" />
+                                    <TableColumn fx:id="fTFinishedAtColumn" minWidth="150.0" prefWidth="-1.0" text="Beendet am" />
+                                    <TableColumn fx:id="fTStatusColumn" minWidth="150.0" prefWidth="-1.0" text="Status" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </TitledPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Erfolgsquote (30 Tage)" />
+                  <Label text="Abgeschlossen (30 Tage)" GridPane.rowIndex="1" />
+                  <ProgressBar fx:id="successRatioBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="successfullFinishedField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</BorderPane>

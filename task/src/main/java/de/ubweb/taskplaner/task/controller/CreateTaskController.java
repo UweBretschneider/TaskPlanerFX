@@ -1,5 +1,7 @@
 package de.ubweb.taskplaner.task.controller;
 
+import de.ubweb.taskplaner.goal.model.Goal;
+import de.ubweb.taskplaner.goal.model.GoalManager;
 import de.ubweb.taskplaner.task.model.Task;
 import de.ubweb.taskplaner.task.model.TaskManager;
 import de.ubweb.taskplaner.task.presenter.CreateTaskPresenter;
@@ -26,6 +28,13 @@ public class CreateTaskController {
 	public void createSelectedTask(Task task) {
 		TaskManager.getInstance().createTask(task);
 
+		stage.close();
+	}
+
+	public void createSelectedTaskAndLinkGoal(Task task, Goal selectedGoal) {
+		TaskManager.getInstance().createTask(task);
+		GoalManager.getInstance().linkTaskToGoal(selectedGoal, task);
+		
 		stage.close();
 	}
 }

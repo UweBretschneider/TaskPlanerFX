@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import de.ubweb.taskplaner.goal.database.GoalDAO;
 import de.ubweb.taskplaner.goal.model.Goal;
+import de.ubweb.taskplaner.goal.model.GoalManager;
 import de.ubweb.taskplaner.task.controller.CreateTaskController;
 import de.ubweb.taskplaner.task.database.CategoryDAO;
 import de.ubweb.taskplaner.task.model.Category;
@@ -61,8 +62,13 @@ public class CreateTaskPresenter implements Initializable {
 
 		task.setCreatedAt(LocalDate.now());
 		task.setTaskStatus(TaskStatus.CREATED);
-
-		controller.createSelectedTask(task);
+		
+		Goal selectedGoal = goalBox.getSelectionModel().getSelectedItem();
+		if(selectedGoal.getGoalId() != NULL_OBJECT_ID) {
+			controller.createSelectedTaskAndLinkGoal(task, selectedGoal);
+		} else {
+			controller.createSelectedTask(task);
+		}
 	}
 
 	@Override
@@ -71,8 +77,7 @@ public class CreateTaskPresenter implements Initializable {
 		categoryBox.setItems(FXCollections.observableList(categoryDao.retrieveCategories()));
 		categoryBox.getSelectionModel().select(0);
 
-		GoalDAO goalDao = new GoalDAO();
-		List<Goal> goals = goalDao.retrieveAll();
+		List<Goal> goals = GoalManager.getInstance().getGoals();
 		//create a special null selection item
 		Goal nullGoal = new Goal();
 		nullGoal.setGoalId(NULL_OBJECT_ID);

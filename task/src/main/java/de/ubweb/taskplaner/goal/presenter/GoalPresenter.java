@@ -1,30 +1,33 @@
-package de.ubweb.taskplaner.task.presenter;
+package de.ubweb.taskplaner.goal.presenter;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import de.ubweb.taskplaner.main.event.IService;
-import de.ubweb.taskplaner.main.event.TaskEvent;
+import de.ubweb.taskplaner.goal.controller.GoalController;
+import de.ubweb.taskplaner.goal.model.Goal;
 import de.ubweb.taskplaner.project.controller.ProjectController;
+import de.ubweb.taskplaner.project.model.Project;
 import de.ubweb.taskplaner.task.model.Task;
-import de.ubweb.taskplaner.task.view.SelectTaskView;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class SelectTaskPresenter implements Initializable {
-	private IService controller;
-	private SelectTaskView selectTaskView;
-	private ObservableList<Task> tasks;
+public class GoalPresenter implements Initializable{
+	private GoalController controller;
+	private Goal goal;
+	private ObservableList<Task> goalTasks;
 
+	@FXML
+	private Label goalLabel;
+	
 	@FXML
 	private TableView<Task> tasksTableView;
 	@FXML
@@ -41,28 +44,27 @@ public class SelectTaskPresenter implements Initializable {
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
 	}
 
-	public void setController(IService controller) {
+	public GoalController getController() {
+		return controller;
+	}
+
+	public void setController(GoalController controller) {
 		this.controller = controller;
 	}
 
-	public void setView(SelectTaskView selectTaskView) {
-		this.selectTaskView = selectTaskView;
-	}
+	public void setGoal(Goal goal) {
+		this.goal = goal;
+		
+		goalLabel.setText(goal.getDescription());
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = FXCollections.observableArrayList(tasks);
+		goalTasks = FXCollections.observableArrayList(goal.getTasks());
 
 		tasksTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		tasksTableView.getItems().clear();
-		tasksTableView.setItems(this.tasks);
+		tasksTableView.setItems(goalTasks);
 	}
 
-	public void selectTask(ActionEvent e) {
-		Task selectedTask = tasksTableView.getSelectionModel().getSelectedItem();
-		if (selectedTask != null) {
-			TaskEvent taskEvent = new TaskEvent(TaskEvent.LINK_SELECTED_TASK);
-			taskEvent.setSelectedTask(selectedTask);
-			controller.handleEvent(taskEvent);
-		}
+	public void linkTask(ActionEvent e) {
+		controller.linkTask();
 	}
 }

@@ -1,5 +1,8 @@
-package de.ubweb.taskplaner.project.controller;
+package de.ubweb.taskplaner.goal.controller;
 
+import de.ubweb.taskplaner.goal.model.Goal;
+import de.ubweb.taskplaner.goal.presenter.GoalPresenter;
+import de.ubweb.taskplaner.goal.view.GoalDetailView;
 import de.ubweb.taskplaner.main.event.CustomEvent;
 import de.ubweb.taskplaner.main.event.IService;
 import de.ubweb.taskplaner.main.event.TaskEvent;
@@ -11,27 +14,30 @@ import de.ubweb.taskplaner.task.model.TaskManager;
 import de.ubweb.taskplaner.task.view.SelectTaskView;
 import javafx.scene.Parent;
 
-public class ProjectController implements IService{
-	private Project project;
-	private ProjectView view;
-	private ProjectPresenter presenter;
+public class GoalController implements IService{
+	private Goal goal;
+	private GoalDetailView view;
+	private GoalPresenter presenter;
 
 	private SelectTaskView selectView;
+	
+	
 
-	public void displayProject(Project project) {
-		view = new ProjectView();
+	public void displayGoal(Goal goal) {
+		view = new GoalDetailView();
 		presenter = view.getPresenter();
 		presenter.setController(this);
 
-		this.project = project;
+		this.goal = goal;
 
-		presenter.setProject(project);
+		presenter.setGoal(goal);
 	}
 
 	public Parent getView() {
 		return view.getView();
 	}
 
+	
 	public void linkTask() {
 		selectView = new SelectTaskView();
 		selectView.getPresenter().setController(this);
@@ -39,11 +45,11 @@ public class ProjectController implements IService{
 	}
 
 	public void linkTask(Task selectedTask) {
-		project.addTask(selectedTask);
+		goal.addTask(selectedTask);
 		selectView.closeStage();
 
-		presenter.setProject(project);
-		//presenter.refreshTable();
+		presenter.setGoal(goal);
+		
 	}
 
 	@Override
@@ -56,6 +62,8 @@ public class ProjectController implements IService{
 				break;
 			}
 		}
+		
 	}
+	
 
 }

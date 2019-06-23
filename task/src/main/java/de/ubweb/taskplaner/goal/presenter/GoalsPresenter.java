@@ -9,6 +9,8 @@ import de.ubweb.taskplaner.goal.model.Goal;
 import de.ubweb.taskplaner.goal.view.GoalView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -34,7 +36,7 @@ public class GoalsPresenter implements Initializable {
 		this.goals = FXCollections.observableArrayList(goals);
 
 		for (Goal goal : this.goals) {
-			mainVbox.getChildren().add(new GoalView(goal));
+			mainVbox.getChildren().add(new GoalView(goal, controller));
 		}
 	}
 

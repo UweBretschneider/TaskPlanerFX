@@ -21,6 +21,8 @@ public class TaskEvent extends CustomEvent {
 	public static final int DELETE_SELECTED_TASK = 40;
 
 	public static final int EDIT_SELECTED_TASK = 50;
+	
+	public static final int LINK_SELECTED_TASK = 60;
 
 	private Task selectedTask;
 

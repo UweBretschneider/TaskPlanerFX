@@ -32,6 +32,10 @@ public class ProjectsPresenter implements Initializable {
 	private TableView<Project> closedProjectsTableView;
 	@FXML
 	private TableColumn<Task, StringProperty> cpTitleColumn;
+	@FXML
+	private TableColumn<Project, Integer> openTasksColumn;
+	@FXML
+	private TableColumn<Project, Integer> finishedTasksColumn;
 
 	public void setController(DisplayProjectsController controller) {
 		this.controller = controller;
@@ -59,6 +63,10 @@ public class ProjectsPresenter implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		opTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		cpTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+		
+		openTasksColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfOpenTasks"));
+		finishedTasksColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfFinishedTasks"));
 	}
 
 	public void showProjectDetails(ActionEvent event) {

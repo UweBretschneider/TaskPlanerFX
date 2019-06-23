@@ -25,6 +25,9 @@ public class Task {
 	private int rescheduleCount = 0;
 
 	private Task parentTask = null;
+	
+	private SolutionQuality solutionQuality = SolutionQuality.NO_SOLUTION;
+	private SolutionTime solutionTime = SolutionTime.NO_SOLUTION;
 
 	public int getTaskId() {
 		return taskId;
@@ -157,6 +160,24 @@ public class Task {
 
 	public void setStartedAt(LocalDate startedAt) {
 		this.startedAt = startedAt;
+	}
+	
+	
+
+	public SolutionQuality getSolutionQuality() {
+		return solutionQuality;
+	}
+
+	public void setSolutionQuality(SolutionQuality solutionQuality) {
+		this.solutionQuality = solutionQuality;
+	}
+
+	public SolutionTime getSolutionTime() {
+		return solutionTime;
+	}
+
+	public void setSolutionTime(SolutionTime solutionTime) {
+		this.solutionTime = solutionTime;
 	}
 
 	@Override

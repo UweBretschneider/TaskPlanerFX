@@ -60,4 +60,9 @@ public class ProjectPresenter implements Initializable {
 		controller.linkTask();
 	}
 
+	public void refreshTable() {
+		tasksTableView.refresh();
+		
+	}
+
 }

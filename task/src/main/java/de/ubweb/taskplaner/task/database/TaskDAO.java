@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ubweb.taskplaner.main.application.MySQLCon;
+import de.ubweb.taskplaner.task.model.SolutionQuality;
+import de.ubweb.taskplaner.task.model.SolutionTime;
 import de.ubweb.taskplaner.task.model.Task;
 import de.ubweb.taskplaner.task.model.TaskDifficulty;
 import de.ubweb.taskplaner.task.model.TaskPriority;
@@ -34,6 +36,8 @@ public class TaskDAO {
 	private static final String FK_CATEGORY = "category_id";
 	private static final String COL_RESCHEDULE_COUNT = "reschedule_count";
 	private static final String FK_PARENT = "parent_task_id";
+	private static final String COL_SOLUTION_QUALITY = "solution_quality";
+	private static final String COL_SOLUTION_TIME = "solution_time";
 
 	private static final String RETRIEVE_CURRENT = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_STATUS + " = " + TaskStatus.CREATED.getStatusCode();
 	private static final String RETRIEVE_PRIORITY = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_STATUS + " = " + TaskStatus.CREATED.getStatusCode()
@@ -49,11 +53,11 @@ public class TaskDAO {
 
 	private static final String UPDATE = QueryBuilder.buildPreparedUpdateStatement(TABLE_NAME, PRIMARY_KEY, COL_TYPE, COL_CREATED_AT, COL_ACTIVE_FROM,
 			COL_DEADLINE, COL_STARTED_AT, COL_FINISHED_AT, COL_SCHEDULED_FOR, COL_TITLE, COL_DESCRIPTION, COL_STATUS, COL_DIFFICULTY, COL_PRIORITY, FK_CATEGORY,
-			COL_RESCHEDULE_COUNT, FK_PARENT);
+			COL_RESCHEDULE_COUNT, FK_PARENT, COL_SOLUTION_QUALITY, COL_SOLUTION_TIME);
 
 	private static final String CREATE = QueryBuilder.buildPreparedInsertStatement(TABLE_NAME, COL_TYPE, COL_CREATED_AT, COL_ACTIVE_FROM, COL_DEADLINE,
 			COL_STARTED_AT, COL_FINISHED_AT, COL_SCHEDULED_FOR, COL_TITLE, COL_DESCRIPTION, COL_STATUS, COL_DIFFICULTY, COL_PRIORITY, FK_CATEGORY,
-			COL_RESCHEDULE_COUNT, FK_PARENT);
+			COL_RESCHEDULE_COUNT, FK_PARENT, COL_SOLUTION_QUALITY, COL_SOLUTION_TIME);
 
 	private static final String DELETE = "DELETE FROM " + TABLE_NAME + " WHERE " + PRIMARY_KEY + " = ?";
 
@@ -146,6 +150,9 @@ public class TaskDAO {
 			} else {
 				stmt.setNull(15, java.sql.Types.VARCHAR);
 			}
+			
+			stmt.setInt(16, task.getSolutionQuality().getStatusCode());
+			stmt.setInt(17, task.getSolutionTime().getStatusCode());
 
 			stmt.execute();
 
@@ -225,7 +232,10 @@ public class TaskDAO {
 		} else {
 			atomicTask.setParentTask(retrieveById(rs.getInt(FK_PARENT)));
 		}
-
+		
+		atomicTask.setSolutionQuality(SolutionQuality.convertStatusCode(rs.getInt(COL_SOLUTION_QUALITY)));
+		atomicTask.setSolutionTime(SolutionTime.convertStatusCode(rs.getInt(COL_SOLUTION_TIME)));
+		
 		return atomicTask;
 	}
 
@@ -285,7 +295,10 @@ public class TaskDAO {
 				stmt.setNull(15, java.sql.Types.INTEGER);
 			}
 
-			stmt.setInt(16, task.getTaskId());
+			stmt.setInt(16, task.getSolutionQuality().getStatusCode());
+			stmt.setInt(17, task.getSolutionTime().getStatusCode());
+			
+			stmt.setInt(18, task.getTaskId());
 
 			stmt.executeUpdate();
 

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="802.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ubweb.taskplaner.task.presenter.TasksPresenter">
+<BorderPane prefHeight="802.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ubweb.taskplaner.task.presenter.TasksPresenter">
    <center>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -110,6 +110,8 @@
                                     <TableColumn fx:id="fTNameColumn" minWidth="250.0" prefWidth="-1.0" text="Title" />
                                     <TableColumn fx:id="fTFinishedAtColumn" minWidth="150.0" prefWidth="-1.0" text="Beendet am" />
                                     <TableColumn fx:id="fTStatusColumn" minWidth="150.0" prefWidth="-1.0" text="Status" />
+                                    <TableColumn fx:id="fTQualityColumn" prefWidth="75.0" text="Quality" />
+                                    <TableColumn fx:id="fTTimeColumn" prefWidth="75.0" text="Time" />
                                  </columns>
                                  <contextMenu>
                                     <ContextMenu>

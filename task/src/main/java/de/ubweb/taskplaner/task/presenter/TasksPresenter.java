@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import de.ubweb.taskplaner.task.controller.DisplayTasksController;
 import de.ubweb.taskplaner.task.model.ScheduleContainer;
+import de.ubweb.taskplaner.task.model.SolutionQuality;
+import de.ubweb.taskplaner.task.model.SolutionTime;
 import de.ubweb.taskplaner.task.model.Task;
 import de.ubweb.taskplaner.task.model.TaskStatus;
 import de.ubweb.taskplaner.task.view.TaskTableWrapper;
@@ -74,6 +76,10 @@ public class TasksPresenter implements Initializable {
 	private TableColumn<TaskTableWrapper, LocalDate> fTFinishedAtColumn;
 	@FXML
 	private TableColumn<TaskTableWrapper, TaskStatus> fTStatusColumn;
+	@FXML
+	private TableColumn<TaskTableWrapper, SolutionQuality> fTQualityColumn;
+	@FXML
+	private TableColumn<TaskTableWrapper, SolutionTime> fTTimeColumn;
 
 	public TasksPresenter() {
 
@@ -161,6 +167,9 @@ public class TasksPresenter implements Initializable {
 		fTNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		fTFinishedAtColumn.setCellValueFactory(new PropertyValueFactory<>("finishedAt"));
 		fTStatusColumn.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
+		
+		fTQualityColumn.setCellValueFactory(new PropertyValueFactory<>("solutionQuality"));
+		fTTimeColumn.setCellValueFactory(new PropertyValueFactory<>("solutionTime"));
 
 		oTIdColumn.setCellValueFactory(new PropertyValueFactory<>("taskId"));
 		oTNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));

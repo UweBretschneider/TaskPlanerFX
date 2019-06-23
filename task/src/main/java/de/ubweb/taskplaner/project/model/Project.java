@@ -1,9 +1,11 @@
 package de.ubweb.taskplaner.project.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.ubweb.taskplaner.task.model.Task;
+import de.ubweb.taskplaner.task.model.TaskStatus;
 
 public class Project {
 	private int projectId;
@@ -35,6 +37,36 @@ public class Project {
 			projectTasks = ProjectManager.getInstance().retrieveTasksForProject(this);
 		}
 		return projectTasks;
+	}
+	
+	public List<Task> getOpenTasks(){
+		List<Task> openTasks = new ArrayList<>();
+		for(Task task: getProjectTasks()) {
+			if(task.getTaskStatus() == TaskStatus.CREATED) {
+				openTasks.add(task);
+			}
+		}
+		
+		return openTasks;
+	}
+	
+	public int getNumberOfOpenTasks() {
+		return getOpenTasks().size();
+	}
+	
+	public List<Task> getFinishedTasks(){
+		List<Task> openTasks = new ArrayList<>();
+		for(Task task: getProjectTasks()) {
+			if(task.getTaskStatus() == TaskStatus.SOLVED) {
+				openTasks.add(task);
+			}
+		}
+		
+		return openTasks;
+	}
+
+	public int getNumberOfFinishedTasks() {
+		return getFinishedTasks().size();
 	}
 
 	public void setProjectTasks(List<Task> projectTasks) {
